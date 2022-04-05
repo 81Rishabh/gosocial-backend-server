@@ -1,6 +1,15 @@
 const express = require('express');
-const port  = 8080;
+const port  = 8000;
+const path = require('path');
 const app = express();
+
+// use express router
+app.use('/' , require('./routes/index'));
+
+// view engine
+app.set('view engine', 'ejs');
+app.set('views' , path.join(__dirname, 'views'));
+
 
 app.listen(port , function(err){
     if(err) {
