@@ -2,9 +2,16 @@ const express = require('express');
 const port  = 8000;
 const path = require('path');
 const app = express();
+const bodyParser = require('body-parser');
+const db = require('./config/db');
+
+// body parserer
+app.use(bodyParser.urlencoded({extended : false}));
+
 
 // use express router
 app.use('/' , require('./routes/index'));
+
 
 // view engine
 app.set('view engine', 'ejs');
