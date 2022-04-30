@@ -3,7 +3,7 @@ const passport = require('passport');
 const LocalStratergy = require('passport-local').Strategy;
 
 // require User Modle
-const User = require('./db/User');
+const User = require('../models/users');
 
 passport.use(new LocalStratergy({
     usernameField : 'email',
@@ -27,11 +27,11 @@ passport.use(new LocalStratergy({
 
 // serialzing the user to decide which key to be kept 
 passport.serializeUser(function(user , done){
-    done(null , user.id);
+     done(null , user.id);
 });
 
 // deserialzing the user from the key in the cookie
-passport.serializeUser(function(user , done){
+passport.deserializeUser(function(id , done){
    User.findById(id , function(err, user){
     if(err) {
         console.log('Error in finding user --> passport', err);
