@@ -7,6 +7,20 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local');
+const MongoStore = require('connect-mongo');
+var expressLayouts = require('express-ejs-layouts');
+const sassMiddleware = require('node-sass-middleware');
+
+
+// scss midileware
+app.use(sassMiddleware({
+    /* Options */
+    src: './assets/scss'
+  , dest: './assets/css'
+  , debug : true
+  , outputStyle: 'extended'
+  , prefix:  '/css'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+}));
 
 // body parserer
 app.use(express.urlencoded({extended : false}));
@@ -15,10 +29,16 @@ app.use(express.urlencoded({extended : false}));
 app.use(cookieParser());
 
 
+// static files
+app.use(express.static('./assets'));
 
+// ejs layout
+app.use(expressLayouts);
 // view engine
+app.set('layout' , './layouts/Layout');
 app.set('view engine', 'ejs');
 app.set('views' , path.join(__dirname, 'views'));
+
 
 
 // use passport Local
@@ -29,14 +49,21 @@ app.use(session({
     resave : false,
     cookie : {
         maxAge : (1000 * 60 * 100)
-    }
+    },
+    store :  MongoStore.create({
+        mongoUrl : 'mongodb://localhost:27017/users-session', 
+        autoRemove : 'disabled'
+    })
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
 
 // use express router
 app.use('/' , require('./routes/index'));
+
+
 
 app.listen(port , function(err){
     if(err) {
