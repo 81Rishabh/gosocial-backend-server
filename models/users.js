@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { required } = require('nodemon/lib/config');
 
 const Users = new mongoose.Schema({
     username : {
@@ -23,5 +22,5 @@ const Users = new mongoose.Schema({
     timestamps : true
 });
 
-const User = mongoose.model('users' , Users);
+const User = mongoose.model('User' , Users);
 module.exports = User;

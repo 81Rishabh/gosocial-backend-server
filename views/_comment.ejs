@@ -1,0 +1,11 @@
+<li class="post-comment-list-items" id="post-comment-<%= comment._id %>">
+    <div>
+       <p class="post-comment-content">🖋️ <%= comment.content %></p>
+       <small class="post-comment-user">commented by: <%= comment.user.username %> </small>
+    </div>  
+    <div class="comment-actions">
+        <% if (locals.user && locals.user.id == comment.user.id) { %>
+           <a class="del-comment-link" href="/comments/destroy/<%= comment._id %>">X</a>
+        <% } %>
+    </div>
+</li>

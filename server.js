@@ -7,10 +7,12 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local');
+const passportJWT = require('./config/passport-jwt');
 const MongoStore = require('connect-mongo');
-var expressLayouts = require('express-ejs-layouts');
+const expressLayouts = require('express-ejs-layouts');
 const sassMiddleware = require('node-sass-middleware');
-
+const flash = require('connect-flash');
+const flashMidileare = require('./config/midileware');
 
 // scss midileware
 app.use(sassMiddleware({
@@ -60,10 +62,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
+// flash midilware
+app.use(flash());
+app.use(flashMidileare.setflash);
+
 // use express router
 app.use('/' , require('./routes/index'));
-
-
 
 app.listen(port , function(err){
     if(err) {

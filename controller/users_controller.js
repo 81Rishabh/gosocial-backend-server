@@ -1,30 +1,9 @@
 const User = require('../models/users');
 
 module.exports.profile = function(req , res) {
-   // const ID = req.cookies.id;
-   // if(req.cookies.id) {
-   //    User.findById(ID , function(err, user) {
-   //        if(user) {
-   //           return res.render('users' , {
-   //              title : "profile" ,
-   //               user : user
-   //          });
-   //        }
-   //    });
-   // }else  {
-   //     // handle cookie not found 
-   //    // redirect back to signIn page
-   //    return res.redirect('/users/SignIn');
-   // }
-
-   const user = {
-      username : 'rishabh',
-      email : 'rishabh@gmail.com',
-   };
 
    return res.render('users' , {
-      title : "profile" ,
-       user : user
+       title : "profile"
   });
 }
 
@@ -70,6 +49,7 @@ module.exports.create = function(req , res) {
 
 
 module.exports.createSession = function (req, res) {
+   req.flash('success' , 'Logged in successfuly');
    return res.redirect('/');
 }
 
@@ -77,5 +57,6 @@ module.exports.createSession = function (req, res) {
 // signin out
 module.exports.distroySession = function (req, res) {
      req.logout();
+     req.flash('success' , 'You have logged out!');
      return res.redirect('/');
 }

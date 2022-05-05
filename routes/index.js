@@ -4,5 +4,8 @@ const homeController = require('../controller/homeController');
 
 router.get('/', homeController.home);
 router.use('/users' , require('./users'));
+router.use('/posts' , require('./posts'));
+router.use('/comments' , require('./comment'));
+router.use('/api' , require('./api'));
 
 module.exports = router;

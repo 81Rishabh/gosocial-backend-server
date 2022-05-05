@@ -1,0 +1,202 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.4;
+  margin: 0;
+}
+
+header {
+  background: rgb(54, 167, 242);
+  width: 100%;
+  padding: 0 1rem;
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+
+  #nav-brand {
+    color: white;
+    text-decoration: none;
+    font-size: 1.3rem;
+  }
+  nav {
+    ul {
+      display: flex;
+      align-items: center;
+    }
+    li {
+      list-style: none;
+      margin: 0 0.5rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+  }
+}
+
+// stying to profile page
+#profile {
+  padding: 1rem;
+  height: 100%;
+}
+
+// home view styling
+
+#home-container {
+  width: 80%;
+  display: block;
+  margin: auto;
+}
+
+#posts-container {
+  background: rgb(246, 246, 246);
+  padding: 1rem;
+
+  #new-post-form {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    textarea {
+      width: 50%;
+      margin-left: 30px;
+      border: 1px solid rgb(218, 217, 217);
+      background: #fff;
+
+      outline: none;
+
+      &:focus {
+        border: 1px solid grey;
+        box-shadow: 0.2rem 0.2rem 0.5rem rgb(238, 238, 238);
+        transition: all 0.3s ease;
+      }
+    }
+
+    input[type="submit"] {
+      margin-left: 30px;
+      width: 100px;
+      padding: 0.5rem;
+      border: none;
+      background: rgb(0, 0, 0);
+      cursor: pointer;
+      color: #fff;
+      font-size: 0.6rem;
+
+      &:hover {
+        transition: 0.3s linear ease;
+        transform: scale(0.97);
+      }
+    }
+  }
+
+  ul {
+    .post-items {
+      display: inline-block;
+      width: 100%;
+      height: auto;
+      background-color: rgb(255, 255, 255);
+      padding: 0.75rem;
+      box-shadow: 0.2rem 0.2rem 1rem rgb(241, 241, 241);
+      border-bottom: 1px solid grey;
+      margin : .25rem 0;
+      div {
+        #post-content {
+          font-size: 1rem;
+          line-height: 1.5;
+          color: rgb(121, 119, 119);
+        }
+
+        .post-footer p {
+          font-size: 0.75rem;
+          color: blue;
+        }
+      }
+    }
+  }
+
+  //  comment section input styling
+  #post-comment {
+    display: flex;
+    justify-content: space-between;
+    input[type="text"] {
+      border: 1px solid lightgrey;
+      padding: 0.4rem;
+
+      &::placeholder {
+        font-size: 0.7rem;
+      }
+    }
+
+    input[type="submit"],
+    .delete-post-btn {
+      padding: 0.5rem;
+      background: #000;
+      cursor: pointer;
+      color: #fff;
+      font-size: 0.6rem;
+
+      &:hover {
+        transition: 0.3s linear ease;
+        background: #000;
+        color: #fff;
+      }
+
+      a {
+        text-decoration: none;
+        color: rgb(255, 59, 59);
+      }
+    }
+
+    .delete-post-btn {
+      background: transparent !important;
+      border: 2px solid red;
+
+      &:hover {
+        background: red !important;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  #post-comment-container {
+    border-top: 1px solid rgb(221, 221, 221);
+    margin-top: 10px;
+    height: 100%;
+    ul {
+      padding: 0;
+    }
+    .post-comment-list-items {
+      display: flex;
+      justify-content: space-between;
+      border-left: 3px solid rgb(248, 248, 248);
+      padding: 0.5rem 0.5rem;
+      margin: 1rem;
+      list-style: none;
+
+      .post-comment-content {
+        font-size: 0.9rem;
+      }
+      .post-comment-user {
+        font-size: 0.6rem;
+        color: rgb(15, 15, 146);
+      }
+
+      .comment-actions {
+        a {
+          text-decoration: none;
+          color: grey;
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+}

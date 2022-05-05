@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.4;
+  margin: 0; }
+
+header {
+  background: #36a7f2;
+  width: 100%;
+  padding: 0 1rem;
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff; }
+  header #nav-brand {
+    color: white;
+    text-decoration: none;
+    font-size: 1.3rem; }
+  header nav ul {
+    display: flex;
+    align-items: center; }
+  header nav li {
+    list-style: none;
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+    cursor: pointer; }
+  header nav a {
+    text-decoration: none;
+    color: #fff; }
+
+#profile {
+  padding: 1rem;
+  height: 100%; }
+
+#home-container {
+  width: 80%;
+  display: block;
+  margin: auto; }
+
+#posts-container {
+  background: #f6f6f6;
+  padding: 1rem; }
+  #posts-container #new-post-form {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap; }
+    #posts-container #new-post-form textarea {
+      width: 50%;
+      margin-left: 30px;
+      border: 1px solid #dad9d9;
+      background: #fff;
+      outline: none; }
+      #posts-container #new-post-form textarea:focus {
+        border: 1px solid grey;
+        box-shadow: 0.2rem 0.2rem 0.5rem #eeeeee;
+        transition: all 0.3s ease; }
+    #posts-container #new-post-form input[type="submit"] {
+      margin-left: 30px;
+      width: 100px;
+      padding: 0.5rem;
+      border: none;
+      background: black;
+      cursor: pointer;
+      color: #fff;
+      font-size: 0.6rem; }
+      #posts-container #new-post-form input[type="submit"]:hover {
+        transition: 0.3s linear ease;
+        transform: scale(0.97); }
+  #posts-container ul .post-items {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding: 0.75rem;
+    box-shadow: 0.2rem 0.2rem 1rem #f1f1f1;
+    border-bottom: 1px solid grey;
+    margin: .25rem 0; }
+    #posts-container ul .post-items div #post-content {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #797777; }
+    #posts-container ul .post-items div .post-footer p {
+      font-size: 0.75rem;
+      color: blue; }
+  #posts-container #post-comment {
+    display: flex;
+    justify-content: space-between; }
+    #posts-container #post-comment input[type="text"] {
+      border: 1px solid lightgrey;
+      padding: 0.4rem; }
+      #posts-container #post-comment input[type="text"]::placeholder {
+        font-size: 0.7rem; }
+    #posts-container #post-comment input[type="submit"],
+    #posts-container #post-comment .delete-post-btn {
+      padding: 0.5rem;
+      background: #000;
+      cursor: pointer;
+      color: #fff;
+      font-size: 0.6rem; }
+      #posts-container #post-comment input[type="submit"]:hover,
+      #posts-container #post-comment .delete-post-btn:hover {
+        transition: 0.3s linear ease;
+        background: #000;
+        color: #fff; }
+      #posts-container #post-comment input[type="submit"] a,
+      #posts-container #post-comment .delete-post-btn a {
+        text-decoration: none;
+        color: #ff3b3b; }
+    #posts-container #post-comment .delete-post-btn {
+      background: transparent !important;
+      border: 2px solid red; }
+      #posts-container #post-comment .delete-post-btn:hover {
+        background: red !important; }
+        #posts-container #post-comment .delete-post-btn:hover a {
+          color: #fff; }
+  #posts-container #post-comment-container {
+    border-top: 1px solid #dddddd;
+    margin-top: 10px;
+    height: 100%; }
+    #posts-container #post-comment-container ul {
+      padding: 0; }
+    #posts-container #post-comment-container .post-comment-list-items {
+      display: flex;
+      justify-content: space-between;
+      border-left: 3px solid #f8f8f8;
+      padding: 0.5rem 0.5rem;
+      margin: 1rem;
+      list-style: none; }
+      #posts-container #post-comment-container .post-comment-list-items .post-comment-content {
+        font-size: 0.9rem; }
+      #posts-container #post-comment-container .post-comment-list-items .post-comment-user {
+        font-size: 0.6rem;
+        color: #0f0f92; }
+      #posts-container #post-comment-container .post-comment-list-items .comment-actions a {
+        text-decoration: none;
+        color: grey;
+        font-size: 0.7rem; }

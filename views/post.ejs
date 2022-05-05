@@ -1,0 +1,41 @@
+<ul>
+<% for( let i=0; i < posts.length; i++ ) { %>
+        <li class="post-items" id="post-items-<%= posts[i]._id %>">
+            <div class="post">
+                <p id="post-content">
+                    <%= posts[i].content %>
+                </p>
+                <div class="post-footer">
+                    <p>
+                        Created by :-
+                        <% if (locals.user && locals.user.id==posts[i].user.id) { %>
+                            You
+                            <% } else {%>
+                                <%= posts[i].user.username %>
+                                    <%} %>
+                    </p>
+                </div>
+                <div id="post-comment">
+                    <form action="/comments/create" method="post" id="add-comment-form">
+                        <input type="text" name="content" placeholder="Type here to add comment" required />
+                        <input type="hidden" name="postId" value="<%= posts[i]._id  %>" />
+                        <input type="submit" value="Add Comment">
+                    </form>
+                    <% if (locals.user && locals.user.id==posts[i].user.id) { %>
+                        <button type="button" class="delete-post-btn">
+                            <a  class="delete-post-link" href="/posts/destroy/<%= posts[i]._id %>" >Delete Post</a>
+                        </button>
+                        <% } %>
+                </div>
+                <div id="post-comment-container">
+                    <h5>Comments</h5>
+                    <ul>
+                        <% for(comment of posts[i].comments) {%>
+                            <%- include('_comment') -%>
+                         <%} %>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <% } %>
+    </ul>
