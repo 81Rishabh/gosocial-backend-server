@@ -24,19 +24,23 @@ module.exports.destroy = async function (req, res) {
     try {
         
           let post = await Post.findById(ID);
-    
-          // remove post
-          post.remove();
-          // Deleting comments that associated with it
-          await Comment.deleteMany({ post: ID });
-           // sending back response to the client
         
-          return res.json(200 , {
-              message : 'Post and associated comments deleted successfully',
-          });
-    
+          if(post.user == req.user.id) {
+                    // remove post
+                post.remove();
+                // Deleting comments that associated with it
+                await Comment.deleteMany({ post: ID });
+                // sending back response to the client
+                
+                return res.json(200 , {
+                    message : 'Post and associated comments deleted successfully',
+                });
+          }
+          else {
+              return res.json(401 ,  {message : 'Unauthorized Access!'});
+          }
+        
     } catch (error) {
-        console.log(error);
        return res.json(500 , {message : 'Internal Server Error!'});
     }
   };

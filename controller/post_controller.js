@@ -28,6 +28,7 @@ module.exports.createPost = async function (req, res) {
   }
 };
 
+
 module.exports.destroy = async function (req, res) {
   const ID = req.params.id;
   try {

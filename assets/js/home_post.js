@@ -81,17 +81,6 @@
     });
    }
 
-    //   Notify user
-   let NotificationToDom = function(message , type) {
-     new Noty({
-        layout : 'topRight',
-        theme : 'relax',
-        text : message,
-        type : type,
-        timeout : 1000
-     }).show();
-   }
-
 //  create comment 
    let createComment = function() {
       const CommentForm = $('#add-comment-form');
@@ -104,6 +93,7 @@
             url : "/comments/create",
             data : CommentForm.serialize(),
             success: function(data) {
+                console.log(data.data);
                 let newComment =  newCommentToDom(data.data.comments);
                   
                 // prepend the list to comment container
@@ -113,7 +103,7 @@
                 NotificationToDom(data.message , 'success');
 
                 // delete link
-                deleteComment($('.del-comment-link'));
+                deleteComment($('.del-comment-link') , false);
             },
              error : function(err) {
                 NotificationToDom(err.responseText , 'error');
@@ -125,7 +115,6 @@
   
 //  Render comment to the dom
    let newCommentToDom = function(comment) {
-       console.log(comment);
         return $(`
             <li class="post-comment-list-items" id="post-comment-${comment._id}">
                 <div>
@@ -140,12 +129,30 @@
    }
     
 //   Delete comment
-let deleteComment = function(deleteLink) {
-    $(deleteLink).on('click', function(e){
-        e.preventDefault();
+let deleteComment = function(deleteLink , isPageLoaded) {
+    
+    if(!isPageLoaded) {
+        $(deleteLink).on('click', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "get",
+                url : deleteLink.attr('href'),
+                success: function(data) {
+                   $(`#post-comment-${data.comment_id}`).remove();
+    
+                   //   Notyfiy when post has created using Noty
+                   NotificationToDom(data.message , 'success');
+                },
+                error : function(err) {
+                    NotificationToDom(err.responseText , 'error');
+                }
+            });
+        }); 
+    }
+    else {
         $.ajax({
             type: "get",
-            url : $(deleteLink).attr('href'),
+            url : `${deleteLink}`,
             success: function(data) {
                $(`#post-comment-${data.comment_id}`).remove();
 
@@ -156,16 +163,35 @@ let deleteComment = function(deleteLink) {
                 NotificationToDom(err.responseText , 'error');
             }
         });
+    }
+}
+
+// Delete comment when page reloaded
+const DeleteLinks = document.querySelectorAll('.del-comment-link');
+for(let i = 0; i < DeleteLinks.length; i++) {
+    DeleteLinks[i].addEventListener('click', e => {
+        e.preventDefault();
+        var attr = e.target.getAttribute('href');
+        deleteComment(attr , true);
     });
 }
   
 //   Posts create and delelte actions
-    let deletePostLink = $('.delete-post-link');
     createPost();
-    deletePost(deletePostLink);
-   
-    //   Comments create and delelte actions
-    let deleteCommentLink = $('.del-comment-link');
+
+ //  Comments create and delelte actions
     createComment();
-    deleteComment(deleteCommentLink);
+
+    
+    //   Notify user
+   let NotificationToDom = function(message , type) {
+    new Noty({
+       layout : 'topRight',
+       theme : 'relax',
+       text : message,
+       type : type,
+       timeout : 1000
+    }).show();
+  }
+
 }

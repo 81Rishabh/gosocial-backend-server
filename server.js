@@ -6,8 +6,9 @@ const db = require('./config/db');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
-const passportLocal = require('./config/passport-local');
 const passportJWT = require('./config/passport-jwt');
+const passportLocal = require('./config/passport-local');
+const googleAuthStrategy = require('./config/passport-google-oAuth');
 const MongoStore = require('connect-mongo');
 const expressLayouts = require('express-ejs-layouts');
 const sassMiddleware = require('node-sass-middleware');
@@ -40,8 +41,6 @@ app.use(expressLayouts);
 app.set('layout' , './layouts/Layout');
 app.set('view engine', 'ejs');
 app.set('views' , path.join(__dirname, 'views'));
-
-
 
 // use passport Local
 app.use(session({
