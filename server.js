@@ -1,11 +1,10 @@
 const express = require('express');
-const port  = 8080;
 const path = require('path');
-const cors = require('cors');
 const app = express();
+const cors = require('cors');
+const port  = 8080;
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, './.env') });
-const db = require('./config/db');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
@@ -17,6 +16,7 @@ const expressLayouts = require('express-ejs-layouts');
 const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const flashMidileare = require('./config/midileware');
+require('./config/db');
 
 app.use(cors());
 
