@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const db = mongoose.connection;
-console.log(process.env.MONGODB_URI);
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/gosocial';
+mongoose.connect(url, {useNewUrlParser: true});
 
 db.on('error' , function(err) {
    console.log("Error in conneting to mongodb");
