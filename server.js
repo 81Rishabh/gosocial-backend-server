@@ -1,9 +1,10 @@
 const express = require('express');
-require('dotenv').config({path :'./.env'});
 const port  = 8080;
 const path = require('path');
 const cors = require('cors');
 const app = express();
+const dotenv = require('dotenv');
+dotenv.config({ path: path.resolve(__dirname, './.env') });
 const db = require('./config/db');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
