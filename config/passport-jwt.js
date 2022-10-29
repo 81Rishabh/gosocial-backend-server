@@ -16,7 +16,6 @@ passport.use(new JWTStratergy(opts , function(jwtPayload , done){
             console.log('error is finding user..!');
             return;
         }
-
         if(user) {
             return done(null, user);
         }

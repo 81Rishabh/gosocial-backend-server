@@ -9,8 +9,12 @@ module.exports.home = async function(req , res) {
             path : 'comments',       // populating the comments
             populate : {
                 path : 'user'
+            },
+            populate : {
+                path : 'likes'
             }
-        });
+        }).populate('likes');
+
         return res.render('home' , {
           posts : posts
         });

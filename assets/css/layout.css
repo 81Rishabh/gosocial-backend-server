@@ -6,6 +6,9 @@ body {
   line-height: 1.4;
   margin: 0; }
 
+html {
+  scroll-behavior: smooth; }
+
 header {
   background: #36a7f2;
   width: 100%;
@@ -22,6 +25,53 @@ header {
   header nav ul {
     display: flex;
     align-items: center; }
+  header nav ul:nth-child(1) {
+    position: relative; }
+    header nav ul:nth-child(1) #message-box {
+      width: 300px;
+      height: 340px;
+      background: #fff;
+      position: absolute;
+      left: 0;
+      box-shadow: 0px 0px 20px 4px #b1a1a178;
+      display: none; }
+      header nav ul:nth-child(1) #message-box #chat-body {
+        height: 90%;
+        width: 100%;
+        overflow-y: scroll;
+        padding: 1rem; }
+        header nav ul:nth-child(1) #message-box #chat-body p {
+          padding: .5rem;
+          clear: both; }
+        header nav ul:nth-child(1) #message-box #chat-body .left-message {
+          background-color: #0d59dd;
+          float: left;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px; }
+        header nav ul:nth-child(1) #message-box #chat-body .right-message {
+          background-color: #ececec;
+          float: right;
+          color: #000;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          border-bottom-left-radius: 10px; }
+      header nav ul:nth-child(1) #message-box #footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+        height: 30px; }
+        header nav ul:nth-child(1) #message-box #footer input[type="text"] {
+          width: 80%; }
+        header nav ul:nth-child(1) #message-box #footer button {
+          width: 20%;
+          cursor: pointer;
+          background: #1fd31f;
+          border: none;
+          color: #fff; }
   header nav li {
     list-style: none;
     margin: 0 0.5rem;
@@ -85,6 +135,8 @@ header {
     #posts-container ul .post-items div .post-footer p {
       font-size: 0.75rem;
       color: blue; }
+    #posts-container ul .post-items div .post-footer .likes-count {
+      color: grey !important; }
   #posts-container #post-comment {
     display: flex;
     justify-content: space-between; }
@@ -94,19 +146,19 @@ header {
       #posts-container #post-comment input[type="text"]::placeholder {
         font-size: 0.7rem; }
     #posts-container #post-comment input[type="submit"],
-    #posts-container #post-comment .delete-post-btn {
+    #posts-container #post-comment .delete-post-btn, #posts-container #post-comment .like-post-btn {
       padding: 0.5rem;
       background: #000;
       cursor: pointer;
       color: #fff;
       font-size: 0.6rem; }
       #posts-container #post-comment input[type="submit"]:hover,
-      #posts-container #post-comment .delete-post-btn:hover {
+      #posts-container #post-comment .delete-post-btn:hover, #posts-container #post-comment .like-post-btn:hover {
         transition: 0.3s linear ease;
         background: #000;
         color: #fff; }
       #posts-container #post-comment input[type="submit"] a,
-      #posts-container #post-comment .delete-post-btn a {
+      #posts-container #post-comment .delete-post-btn a, #posts-container #post-comment .like-post-btn a {
         text-decoration: none;
         color: #ff3b3b; }
     #posts-container #post-comment .delete-post-btn {
@@ -116,6 +168,14 @@ header {
         background: red !important; }
         #posts-container #post-comment .delete-post-btn:hover a {
           color: #fff; }
+    #posts-container #post-comment .like-post-btn {
+      background: #0066ff;
+      border: 2px solid #1e9efa; }
+      #posts-container #post-comment .like-post-btn a {
+        color: white; }
+      #posts-container #post-comment .like-post-btn:hover {
+        background: #0066ff;
+        transform: scale(0.96); }
   #posts-container #post-comment-container {
     border-top: 1px solid #dddddd;
     margin-top: 10px;
@@ -138,3 +198,8 @@ header {
         text-decoration: none;
         color: grey;
         font-size: 0.7rem; }
+
+#forgot-password-containers {
+  width: 50%;
+  display: block;
+  margin: 5rem auto; }

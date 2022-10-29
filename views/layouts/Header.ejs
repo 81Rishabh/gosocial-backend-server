@@ -2,7 +2,24 @@
     <a href="/" id="nav-brand">gosocial</a>
     <nav>
        <ul>
+         <li>
+            <p id="messages">Messages</p>
+             <% if (locals.user) { %>
+               <div id="message-box">
+                  <div id="chat-body">
+                    
+                  </div>
+                   <div id="footer">
+                      <input type="text" name="message" placeholder="Type your message here...." value="" id="message-input-box">
+                      <button id="send-message-btn">send</button>
+                   </div>
+               </div>
+             <% } %>
+         </li>
          <% if (locals.user) { %>
+            <li>
+               <img src="<%= user.avatar%>" />
+           </li>
             <li>
                 <a href="/users/profile"><%= user.username  %> </a>
             </li>

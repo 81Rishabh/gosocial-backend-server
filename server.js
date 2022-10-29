@@ -1,6 +1,8 @@
 const express = require('express');
-const port  = 8000;
+require('dotenv').config({path :'./.env'});
+const port  = 8080;
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const db = require('./config/db');
 const cookieParser = require('cookie-parser');
@@ -15,6 +17,17 @@ const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const flashMidileare = require('./config/midileware');
 
+app.use(cors());
+
+// chat server initialization
+const { createServer } = require("http");
+const httpServer = createServer(app);
+const ChatSocket = require('./config/chat_sockets').chat_sockets(httpServer);
+httpServer.listen(4200);
+console.log("chat server is listening on 5000");
+
+
+
 // scss midileware
 app.use(sassMiddleware({
     /* Options */
@@ -27,6 +40,7 @@ app.use(sassMiddleware({
 
 // body parserer
 app.use(express.urlencoded({extended : false}));
+app.use(express.json());
 
 // cookie parser
 app.use(cookieParser());
@@ -34,6 +48,9 @@ app.use(cookieParser());
 
 // static files
 app.use(express.static('./assets'));
+
+// make the uploads folder to static 
+app.use('/uploads' , express.static(__dirname + '/uploads'));
 
 // ejs layout
 app.use(expressLayouts);
@@ -68,7 +85,8 @@ app.use(flashMidileare.setflash);
 // use express router
 app.use('/' , require('./routes/index'));
 
-app.listen(port , function(err){
+
+app.listen(`${process.env.PORT}` || port , function(err){
     if(err) {
         console.log(`Error is : ${err}`);
         return;

@@ -1,5 +1,5 @@
 <ul>
-<% for( let i=0; i < posts.length; i++ ) { %>
+    <% for( let i=0; i < posts.length; i++ ) { %>
         <li class="post-items" id="post-items-<%= posts[i]._id %>">
             <div class="post">
                 <p id="post-content">
@@ -14,28 +14,38 @@
                                 <%= posts[i].user.username %>
                                     <%} %>
                     </p>
+                    <p class="likes-count">Likes: <span><%=posts[i].likes.length  %> </span></p>
                 </div>
                 <div id="post-comment">
                     <form action="/comments/create" method="post" id="add-comment-form">
-                        <input type="text" name="content" placeholder="Type here to add comment" required />
+                        <input type="text" name="content" placeholder="Type here to add comment" id="comment-box"
+                            required />
                         <input type="hidden" name="postId" value="<%= posts[i]._id  %>" />
                         <input type="submit" value="Add Comment">
                     </form>
-                    <% if (locals.user && locals.user.id==posts[i].user.id) { %>
-                        <button type="button" class="delete-post-btn">
-                            <a  class="delete-post-link" href="/posts/destroy/<%= posts[i]._id %>" >Delete Post</a>
+                    <div id="actions">
+                        
+                        <button type="button" class="like-post-btn">
+                            <a class="like-post-link" data-likes="<%= posts[i].likes.length %>" href="/likes/toggle?id=<%= posts[i]._id%>&type=Post">
+                                <span>Like</span>
+                            </a>
                         </button>
-                        <% } %>
+                         <% if (locals.user && locals.user.id==posts[i].user.id) { %>
+                            <button type="button" class="delete-post-btn">
+                                <a class="delete-post-link" href="/posts/destroy/<%= posts[i]._id %>">Delete Post</a>
+                            </button>
+                            <% } %>
+                        </div>
                 </div>
                 <div id="post-comment-container">
                     <h5>Comments</h5>
                     <ul>
                         <% for(comment of posts[i].comments) {%>
                             <%- include('_comment') -%>
-                         <%} %>
+                        <%} %>
                     </ul>
                 </div>
             </div>
         </li>
         <% } %>
-    </ul>
+</ul>

@@ -21,7 +21,7 @@ passport.use(new LocalStratergy({
                return done(null , false);
            }
            return done(null , user);
-      })
+      });
    }
 ));
 
@@ -43,20 +43,21 @@ passport.deserializeUser(function(id , done){
 });
 
 // check if user is already authenticated
-passport.checkAuthentication = function(req , res , next) {
+passport.checkAuthentication = function(req, res,next) {
     //  if user is signed in  , then pass on the request  to the next function(controller's action)
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    return res.redirect('/users/SignIn')
+   if(req.isAuthenticated()) {
+       next();
+   }
+   return res.redirect('/users/signIn');
 }
 
-passport.setAuthenticatedUser = function(req , res , next) {
-    if(req.isAuthenticated()) {
-        // req.user contains the currently logged in user form the session and sending this to locals form the next view
-        res.locals.user = req.user;
-    }
-    next();
+// set authenticated user 
+passport.setAuthenticatedUser = function(req, res, next) {
+  if(req.isAuthenticated()) {
+       // req.user contains the currently logged in user form the session and sending this to locals form the next view
+      res.locals.user = req.user
+  }
+  next();
 }
 
 module.exports = passport;

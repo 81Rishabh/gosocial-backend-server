@@ -18,8 +18,8 @@
                      else {
                         $('#posts > ul').prepend(newPost);
                      }
-                     let deleteLink = $('.delete-post-link');
-                     deletePost(deleteLink);
+                      let deleteLink = $('.delete-post-link');
+                      deletePost(deleteLink);
 
                        //   Notyfiy when post has created using Noty
                       NotificationToDom(data.message , 'success');
@@ -50,9 +50,17 @@
                             <input type="hidden" name="postId"  value="${post._id}" />
                             <input type="submit" value="Add Comment">
                         </form>
-                        <button type="button" class="delete-post-btn">
-                             <a class="delete-post-link" href="/posts/destroy/${post._id}" >Delete Post</a>
-                        </button>
+                        <div id="actions">
+                            <button type="button" class="like-post-btn">
+                                <a class="like-post-link" data-likes="<%= posts[i].likes.length %>" href="/likes/toggle?id=${post._id}&type=Post">
+                                    <span>Like</span>
+                                </a>
+                            </button>
+                            <button type="button" class="delete-post-btn">
+                               <a class="delete-post-link" href="/posts/destroy/${post._id}" >Delete Post</a>
+                           </button>
+                        </div>
+                       
                     </div>
                     <div id="post-comment-container">
                         <h5>Comments</h5>
@@ -87,15 +95,14 @@
 
       CommentForm.on('submit', function(e){
           e.preventDefault();
-         
+          
           $.ajax({
             type: "POST",
             url : "/comments/create",
             data : CommentForm.serialize(),
             success: function(data) {
-                console.log(data.data);
                 let newComment =  newCommentToDom(data.data.comments);
-                  
+              console.log(newComment);
                 // prepend the list to comment container
                 $('#post-comment-container ul').prepend(newComment);
 
@@ -109,8 +116,12 @@
                 NotificationToDom(err.responseText , 'error');
             }
         });
-          
-      });
+           
+
+        // after sending request 
+        // clear comment input box
+       $('#comment-box').val("");
+    });
    }
   
 //  Render comment to the dom
@@ -130,7 +141,6 @@
     
 //   Delete comment
 let deleteComment = function(deleteLink , isPageLoaded) {
-    
     if(!isPageLoaded) {
         $(deleteLink).on('click', function(e){
             e.preventDefault();
@@ -175,13 +185,21 @@ for(let i = 0; i < DeleteLinks.length; i++) {
         deleteComment(attr , true);
     });
 }
-  
+
+const DeletePostLinks = document.querySelectorAll('.post-items');
+for(let i = 0; i < DeleteLinks.length; i++) {
+    DeletePostLinks[i].addEventListener('click', e => {
+        e.preventDefault();
+        let self = e.target;
+        deletePost(self);
+    });
+}
+
 //   Posts create and delelte actions
     createPost();
-
+    deletePost($('.delete-post-link'));
  //  Comments create and delelte actions
     createComment();
-
     
     //   Notify user
    let NotificationToDom = function(message , type) {
@@ -194,4 +212,6 @@ for(let i = 0; i < DeleteLinks.length; i++) {
     }).show();
   }
 
+
+ 
 }

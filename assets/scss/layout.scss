@@ -8,6 +8,10 @@ body {
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 header {
   background: rgb(54, 167, 242);
   width: 100%;
@@ -28,6 +32,76 @@ header {
       display: flex;
       align-items: center;
     }
+
+    //  input box-stying which is inside the chatbox
+
+    ul:nth-child(1) {
+      position: relative;
+      #message-box {
+        width: 300px;
+        height: 340px;
+        background: #fff;
+        position: absolute;
+        left : 0;
+
+        box-shadow: 0px 0px 20px 4px #b1a1a178;
+        display :none;    
+
+        
+       
+        #chat-body {
+            height : 90%;
+            width : 100%;
+            overflow-y: scroll;
+            padding : 1rem;
+             // message styleing
+             p {
+              padding : .5rem;
+              clear: both;
+             }
+             .left-message {
+                background-color: rgb(13, 89, 221);
+                float : left;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+             } 
+             
+             .right-message {
+                background-color: rgb(236, 236, 236);
+                float :right;
+                color : #000;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom-left-radius: 10px;
+             }
+         
+        }
+
+        #footer {
+          position: absolute;
+          bottom : 0;
+          width : 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: stretch;
+          height : 30px;
+
+          input[type="text"] {
+              width : 80%;
+          }
+
+          button {
+            width : 20%;
+            cursor :pointer;
+            background : rgb(31, 211, 31);
+            border: none;
+            color : #fff;
+          }
+        }
+      }
+    }
+
     li {
       list-style: none;
       margin: 0 0.5rem;
@@ -112,10 +186,17 @@ header {
           color: rgb(121, 119, 119);
         }
 
-        .post-footer p {
-          font-size: 0.75rem;
-          color: blue;
+        .post-footer {
+          p {
+            font-size: 0.75rem;
+            color: blue;
+          }
+          .likes-count {
+            color: grey !important;
+          }
         }
+
+         
       }
     }
   }
@@ -134,7 +215,7 @@ header {
     }
 
     input[type="submit"],
-    .delete-post-btn {
+    .delete-post-btn,.like-post-btn {
       padding: 0.5rem;
       background: #000;
       cursor: pointer;
@@ -156,7 +237,8 @@ header {
     .delete-post-btn {
       background: transparent !important;
       border: 2px solid red;
-
+      
+     
       &:hover {
         background: red !important;
 
@@ -165,6 +247,20 @@ header {
         }
       }
     }
+    
+    .like-post-btn {
+      background: rgb(0, 102, 255);
+      border: 2px solid rgb(30, 158, 250);
+      a {
+        color : rgb(255, 255, 255);
+      }
+       
+      &:hover {
+        background : rgb(0, 102, 255);
+        transform: scale(.96);
+      }
+    }
+    
   }
 
   #post-comment-container {
@@ -199,4 +295,11 @@ header {
       }
     }
   }
+}
+
+
+#forgot-password-containers {
+  width : 50%;
+   display : block;
+   margin: 5rem auto;
 }
