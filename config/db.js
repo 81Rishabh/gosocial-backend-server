@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
+mongoose.connect(`${process.env.MONGODB_URI}` , {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
-const url = `${process.env.MONGODB_URI}` || 'mongodb://localhost:27017/gosocial';
-mongoose.connect(process.env.MONGODB_URI);
 
-db.on('error' , function(err) {
-   console.log("Error in conneting to mongodb");
-});
 
 db.once('open' , function() {
   console.log('Connected to mongodb.......✌️ ✌️ ✌️');
+});
+
+db.on('error' , function(err) {
+  console.log("Error in conneting to mongodb");
 });
