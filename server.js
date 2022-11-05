@@ -4,7 +4,7 @@ const app = express();
 const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, './.env') });
-const PORT  = process.env.PORT || 8080;
+const port  =  8080;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
@@ -87,10 +87,10 @@ app.use(flashMidileare.setflash);
 app.use('/' , require('./routes/index'));
 
 
-app.listen(PORT, function(err){
+app.listen(process.env.PORT || port, function(err){
     if(err) {
         console.log(`Error is : ${err}`);
         return;
     }
-    console.log("Server is running on the port " + PORT);
+    console.log("Server is running on the port " + process.env.PORT || port);
 });
