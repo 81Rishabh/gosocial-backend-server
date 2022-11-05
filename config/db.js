@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
-mongoose.connect(`${process.env.MONGODB_URI}` || `${process.env.LOCAL}`, {useNewUrlParser: true});
+mongoose.connect(`${process.env.MONGODB_URI}` || `${process.env.LOCAL}`, {
+  useFindAndModify: false,
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+});
 const db = mongoose.connection;
 
 
